@@ -353,6 +353,66 @@ body::after {
   .triple-poster:last-child { border-bottom: none; }
 }
 
+/* ══════════════════════════════════════════
+   VENUE PHOTOS
+   ══════════════════════════════════════════ */
+/* Full-bleed cinematic photo */
+.venue-hero {
+  width: 100%; overflow: hidden; position: relative;
+}
+.venue-hero img {
+  width: 100%; height: auto; display: block;
+  object-fit: contain;
+  filter: brightness(.85) contrast(1.05);
+  transition: transform 6s cubic-bezier(.22,1,.36,1);
+}
+.venue-hero:hover img { transform: scale(1.03); }
+.venue-hero::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to bottom, var(--surface) 0%, transparent 10%, transparent 85%, var(--surface) 100%);
+  pointer-events: none;
+}
+
+/* Photo gallery grid */
+.venue-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+  margin: 28px 0 8px;
+}
+.venue-grid.two-col { grid-template-columns: 1fr 1fr; }
+.venue-cell {
+  overflow: hidden; position: relative;
+  aspect-ratio: 16/10;
+}
+.venue-cell.tall { aspect-ratio: 9/14; }
+.venue-cell img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  filter: brightness(.88) contrast(1.05) saturate(.95);
+  transition: filter .5s, transform 5s cubic-bezier(.22,1,.36,1);
+}
+.venue-cell:hover img {
+  filter: brightness(.95) contrast(1.05) saturate(1);
+  transform: scale(1.04);
+}
+.venue-caption {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 24px 16px 12px;
+  background: linear-gradient(to top, rgba(0,0,0,.7) 0%, transparent 100%);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600; font-size: .62rem;
+  letter-spacing: .18em; text-transform: uppercase;
+  color: rgba(255,255,255,.6);
+  pointer-events: none;
+}
+@media (max-width: 600px) {
+  .venue-grid { grid-template-columns: 1fr; }
+  .venue-grid.two-col { grid-template-columns: 1fr; }
+  .venue-cell { aspect-ratio: 16/10; }
+  .venue-cell.tall { aspect-ratio: 16/10; }
+  .venue-hero img { width: 100%; }
+}
+
 /* Art center: when used inside a full-width bg wrapper, center the content */
 .art-wrap { width: 100%; }
 .art-center {
@@ -728,6 +788,11 @@ body::after {
   </div>
 </nav>
 
+<!-- VENUE: Exterior sign -->
+<div class="venue-hero r">
+  <img src="venue/outside.jpg" alt="PubKey DC — exterior" loading="lazy">
+</div>
+
 <!-- ══════════════════════════════
      01 — STORY
      ══════════════════════════════ -->
@@ -765,6 +830,16 @@ body::after {
     <div class="sec-rule"></div>
   </div>
   <p class="body r r1">PubKey DC has hosted <strong>500+ events</strong> &mdash; from intimate dinners to full-venue productions. The spaces below are designed to flex for any format.</p>
+
+  <!-- Venue gallery -->
+  <div class="venue-grid r r2" style="grid-template-columns:1fr 1fr">
+    <div class="venue-cell"><img src="venue/fulleventseated.png" alt="Seated event space" loading="lazy"><div class="venue-caption">Seated Event Space</div></div>
+    <div class="venue-cell"><img src="venue/fullevent.JPG" alt="Standing event space" loading="lazy"><div class="venue-caption">Standing Event Space</div></div>
+  </div>
+  <div class="venue-grid r r3" style="grid-template-columns:1fr 1fr">
+    <div class="venue-cell"><img src="venue/pub.jpeg" alt="The Pub" loading="lazy"><div class="venue-caption">The Pub</div></div>
+    <div class="venue-cell"><img src="venue/eventbar.jpg" alt="Event Bar" loading="lazy"><div class="venue-caption">Event Bar</div></div>
+  </div>
   <div class="tbl-wrap r r2">
   <table class="tbl">
     <thead><tr><th>Tier</th><th>Space</th><th>Capacity</th><th>Min Hours</th><th>Min Spend</th><th>Per Person</th></tr></thead>
@@ -818,7 +893,9 @@ body::after {
   </div>
 </section>
 
-<div class="div"><div class="div-line"></div></div>
+<div class="venue-hero r">
+  <img src="venue/beerflag.JPG" alt="Cheers" loading="lazy">
+</div>
 
 <!-- ══════════════════════════════
      04 — DRINKS
@@ -1007,7 +1084,9 @@ body::after {
   <div class="custom-note r">Not seeing what you're looking for? We build custom menus. Ask us.</div>
 </section>
 
-<div class="div"><div class="div-line"></div></div>
+<div class="venue-hero r">
+  <img src="venue/tablesetting.png" alt="Table settings" loading="lazy">
+</div>
 
 <!-- ══════════════════════════════
      07 — PLATED
